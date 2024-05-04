@@ -13,7 +13,7 @@ const app = express(),
       server = http.Server(app),
       io = socket(server);
 
-server.listen(config.port);
+
 
 games = {};
 
