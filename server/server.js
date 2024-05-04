@@ -19,7 +19,10 @@ games = {};
 
 myIo(io);
 
-console.log(`Server listening on port ${config.port}`);
+server.listen(process.env.PORT || config.port, () => {
+    console.log(`Server listening on port ${process.env.PORT || config.port}`);
+});
+
 
 const Handlebars = handlebars.create({
   extname: '.html', 
