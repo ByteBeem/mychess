@@ -75,8 +75,13 @@ function updateStatus () {
     }
 
     else if (!gameHasStarted) {
-        status = 'Waiting for black to join'
+        status = 'Waiting for black to join';
+        document.getElementById('loading').innerHTML = '<div class="loader"></div>';
     }
+    else if(gameHasStarted){
+        document.getElementById('loading').style.display = 'none'
+    }
+    
 
     // game still on
     else {

@@ -1,20 +1,95 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        {{> head}}
-    </head>
-    <body>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #myBoard {
+            position: relative;
+            width: 90vw; 
+            max-width: 700px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+        }
 
-        <div id="myBoard" style="width: 700px"></div>
-        <label>Status:</label>
-        <div id="status"></div>
-        <label>PGN:</label>
-        <div id="pgn"></div>
+        #status, #pgn {
+            margin-top: 10px;
+            color: white;
+            font-size: 24px;
+            text-align: center;
+        }
 
-        <script>
-            let playerColor = '{{color}}';
-            console.log('Playing as ' + playerColor);
-        </script>
-        <script src="/public/js/index.js"></script>
+        .loader-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.788); 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white; /* Text color */
+            font-size: 24px; /* Text size */
+            text-align: center; /* Text alignment */
+            z-index: 1; /* Ensure text is above loader */
+        }
 
-    </body>
+        .loader {
+            border: 5px solid #f3f3f3; 
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: auto;
+            z-index: 0; /* Ensure loader is behind text */
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    {{> head}}
+</head>
+<body>
+
+<div id="myBoard">
+    <!-- Add id="status" here -->
+    <div id="status" style="display: none;">Your status message here</div>
+</div>
+<div class="loader-container" id="loading">
+    Waiting for black to join
+    <div class="loader"></div>
+</div>
+
+
+<script>
+    // JavaScript to show the status for 2 seconds
+    document.addEventListener('DOMContentLoaded', function () {
+        // Show the status message
+        document.getElementById('status').style.display = 'block';
+
+        // Hide the status message after 2 seconds
+        setTimeout(function () {
+            document.getElementById('status').style.display = 'none';
+        }, 2000); // 2 seconds in milliseconds
+    });
+
+    let playerColor = '{{color}}';
+    console.log('Playing as ' + playerColor);
+</script>
+<script src="/public/js/index.js"></script>
+
+</body>
 </html>
